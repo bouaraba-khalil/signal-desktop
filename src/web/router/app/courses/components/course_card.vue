@@ -4,25 +4,24 @@ import { Button } from "primevue";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 
-import { localMapper } from "@/lib/utils";
-
-import type { Course } from "@/types/core";
+import type { Courses } from "@/types/core";
 
 const { locale } = useI18n();
 
 const props = defineProps<{
-  course: Course;
+  course: Courses & { order: number };
 }>();
 
 const description = computed(() => {
-  const description = localMapper(locale.value, props.course, "description");
+  const localDescription =
+    props.course.description[locale.value as keyof typeof props.course.description] ?? "";
   const md = new MarkdownIt();
 
-  return md.render(description);
+  return md.render(localDescription);
 });
 
 const title = computed(() => {
-  return localMapper(locale.value, props.course, "title");
+  return props.course.name[locale.value as keyof typeof props.course.name] ?? "";
 });
 </script>
 
@@ -39,7 +38,7 @@ const title = computed(() => {
         <div class="text-sm text-gray-500" v-html="description" />
       </div>
     </div>
-    <RouterLink :to="`/app/courses/${props.course.id}`">
+    <RouterLink :to="`/app/courses/${props.course._id}`">
       <Button
         label="Start"
         icon="pi pi-chevron-right"

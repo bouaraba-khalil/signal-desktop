@@ -14,12 +14,16 @@ const props = defineProps<{
 }>();
 
 const description = vue.computed(() => {
-  // take only 30 characters of the description
   const localDescription =
     props.learningPath.description[locale.value as keyof typeof props.learningPath.description] ??
     "";
+
   const md = new MarkdownIt();
   return md.render(localDescription);
+});
+
+const title = vue.computed(() => {
+  return props.learningPath.name[locale.value as keyof typeof props.learningPath.name] ?? "";
 });
 </script>
 
@@ -34,7 +38,7 @@ const description = vue.computed(() => {
         class="h-40 w-full rounded-xl object-cover"
       />
       <h3 class="text-lg font-bold transition-all duration-300 group-hover/card:text-primary">
-        {{ learningPath.name[locale as keyof typeof learningPath.name] }}
+        {{ title }}
       </h3>
       <div class="flex flex-col gap-2 text-sm text-gray-500" v-html="description" />
     </div>

@@ -6,26 +6,35 @@ import { useRoute } from "vue-router";
 
 import Loader from "@/components/loader/loader.vue";
 import { useGet } from "@/composables/useGet";
-import { localMapper } from "@/lib/utils";
 
 import CourseCard from "./components/course_card.vue";
 
-import type { Course, LearningPath } from "@/types/core";
+import type { Courses, LearningPaths } from "@/types/core";
 
 const { locale } = useI18n();
 
 const route = useRoute();
 const learningPathId = route.params.learningPathId;
 
-const getCourseList = useGet<LearningPath & { courses: Course[] }>({
+const getCourseList = useGet<LearningPaths & { courses: (Courses & { order: number })[] }>({
   path: `/core/learning-paths/${learningPathId}`,
   options: {
     enabled: !!learningPathId,
   },
 });
-const md = new MarkdownIt();
 const description = computed(() => {
-  return md.render(localMapper(locale.value, getCourseList.data.value, "description"));
+  const localDescription =
+    getCourseList.data.value?.description[
+      locale.value as keyof typeof getCourseList.data.value.description
+    ] ?? "";
+  const md = new MarkdownIt();
+  return md.render(localDescription);
+});
+
+const title = computed(() => {
+  return (
+    getCourseList.data.value?.name[locale.value as keyof typeof getCourseList.data.value.name] ?? ""
+  );
 });
 </script>
 
@@ -36,7 +45,7 @@ const description = computed(() => {
     </div>
     <div v-else class="m-4 flex flex-col gap-4">
       <h1 class="w-full text-center text-4xl font-bold text-primary">
-        {{ localMapper(locale, getCourseList.data.value, "title") }}
+        {{ title }}
       </h1>
       <div
         class="flex flex-col gap-4 text-lg font-medium text-color-emphasis"
@@ -44,7 +53,7 @@ const description = computed(() => {
       />
       <CourseCard
         v-for="course in getCourseList.data.value.courses"
-        :key="course.id"
+        :key="course._id"
         :course="course"
       />
     </div>
