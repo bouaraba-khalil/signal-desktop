@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [],
+  "sortTailwindcss": {
+    "stylesheet": "./src/web/assets/css/main.css",
+    "attributes": ["class", "className"],
+    "functions": ["clsx", "cn"],
+    "preserveWhitespace": false
+  },
+  "vueIndentScriptAndStyle": false,
+  "sortImports": {
+    "newlinesBetween": true,
+    "partitionByComment": true,
+    "groups": [
+      ["value-builtin", "value-external"],
+      "value-internal",
+      ["value-parent", "value-sibling", "value-index"],
+      "type-import",
+      ["type-parent", "type-sibling", "type-index"],
+      "type-internal",
+      "unknown"
+    ]
+  }
+}
