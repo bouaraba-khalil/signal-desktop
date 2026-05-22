@@ -6,11 +6,11 @@ import { useGet } from "@/composables/useGet";
 
 import LearningPathCard from "./learning_path_card.vue";
 
-import type { LearningPath } from "@/types/core";
+import type { LearningPaths } from "@/types/core";
 
 const { locale } = useI18n();
 
-const getLearningPaths = useGet<LearningPath[]>({
+const getLearningPaths = useGet<LearningPaths[]>({
   path: "/core/learning-paths",
 });
 </script>
@@ -22,7 +22,7 @@ const getLearningPaths = useGet<LearningPath[]>({
   <div v-else class="m-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
     <LearningPathCard
       v-for="learningPath in getLearningPaths.data.value"
-      :key="learningPath.id"
+      :key="learningPath._id"
       :learningPath="learningPath"
     />
   </div>

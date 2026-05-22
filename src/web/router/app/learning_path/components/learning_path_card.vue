@@ -5,21 +5,21 @@ import * as vue from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterLink } from "vue-router";
 
-import { localMapper } from "@/lib/utils";
-
-import type { LearningPath } from "@/types/core";
+import type { LearningPaths } from "@/types/core";
 
 const { locale } = useI18n();
 
 const props = defineProps<{
-  learningPath: LearningPath;
+  learningPath: LearningPaths;
 }>();
 
 const description = vue.computed(() => {
-  const description = localMapper(locale.value, props.learningPath, "description");
+  // take only 30 characters of the description
+  const localDescription =
+    props.learningPath.description[locale.value as keyof typeof props.learningPath.description] ??
+    "";
   const md = new MarkdownIt();
-
-  return md.render(description);
+  return md.render(localDescription);
 });
 </script>
 
@@ -29,16 +29,16 @@ const description = vue.computed(() => {
   >
     <div class="flex flex-1 flex-col gap-2">
       <img
-        :src="props.learningPath.image"
+        src="@/assets/images/icon.png"
         alt="learning path image"
         class="h-40 w-full rounded-xl object-cover"
       />
       <h3 class="text-lg font-bold transition-all duration-300 group-hover/card:text-primary">
-        {{ localMapper(locale, props.learningPath, "title") }}
+        {{ learningPath.name[locale as keyof typeof learningPath.name] }}
       </h3>
       <div class="flex flex-col gap-2 text-sm text-gray-500" v-html="description" />
     </div>
-    <RouterLink :to="`/app/learning-path/${props.learningPath.id}`" class="w-full">
+    <RouterLink :to="`/app/learning-path/${props.learningPath._id}`" class="w-full">
       <Button
         class="flex-end mt-4 w-full"
         label="Start"

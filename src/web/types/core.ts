@@ -87,3 +87,22 @@ export interface Lesson {
   createdAt: Date;
   updatedAt: Date;
 }
+
+
+
+export type I18nText = {
+  ar?: string;
+  fr: string;
+  en?: string;
+};
+
+export type LearningPaths = {
+  _id: string;
+  order: number;
+  name: I18nText;
+  description: I18nText;
+  level: "beginner" | "intermediate" | "advanced" | "professional";
+  status: "active" | "inactive";
+  createdAt: string;
+  updatedAt: string;
+};
