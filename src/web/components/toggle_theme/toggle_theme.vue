@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { useLocalStorage } from "@vueuse/core";
 import { ToggleSwitch } from "primevue";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, watch } from "vue";
 
-const isDarkMode = ref(true);
+const isDarkMode = useLocalStorage("isDarkMode", true);
 
 onMounted(() => {
   if (isDarkMode.value) {

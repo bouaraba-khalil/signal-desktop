@@ -1,8 +1,13 @@
 <script setup lang="ts">
+import { useLocalStorage } from "@vueuse/core";
 import { Select } from "primevue";
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 
-const textSize = ref("16px");
+const textSize = useLocalStorage("textSize", "16px");
+
+onMounted(() => {
+  document.documentElement.style.fontSize = textSize.value;
+});
 
 const textSizeList = ["12px", "14px", "16px", "18px", "20px"];
 

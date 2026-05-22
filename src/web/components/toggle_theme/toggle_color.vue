@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import { palette, updatePreset } from "@primeuix/themes";
+import { useLocalStorage } from "@vueuse/core";
 import { Select } from "primevue";
-import { ref, watch } from "vue";
+import { onMounted, watch } from "vue";
 
-const primaryColor = ref("blue");
+const primaryColor = useLocalStorage("primaryColor", "blue");
+onMounted(() => {
+  updatePreset({
+    semantic: {
+      primary: palette(`{${primaryColor.value}}`),
+    },
+  });
+});
 
 watch(primaryColor, (newVal) => {
   updatePreset({

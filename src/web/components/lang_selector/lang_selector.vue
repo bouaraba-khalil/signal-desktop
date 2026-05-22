@@ -1,9 +1,20 @@
 <script setup lang="ts">
+import { useLocalStorage } from "@vueuse/core";
 import { Select } from "primevue";
+import { onMounted, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
-const { locale } = useI18n({
+const locale = useLocalStorage("locale", "fr");
+
+const i18n = useI18n({
   useScope: "global",
+});
+
+onMounted(() => {
+  i18n.locale.value = locale.value;
+});
+watch(locale, (newVal) => {
+  i18n.locale.value = newVal;
 });
 const availableLocales = ["en", "fr", "ar"];
 const translations = {
