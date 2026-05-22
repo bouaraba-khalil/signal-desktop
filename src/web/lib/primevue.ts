@@ -4,6 +4,6 @@ import Aura from "@primeuix/themes/aura";
 
 export const customPrimeVueTheme = definePreset(Aura, {
   semantic: {
-    primary: palette("{amber}"),
+    primary: palette("{blue}"),
   },
 });

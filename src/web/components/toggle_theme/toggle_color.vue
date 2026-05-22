@@ -3,7 +3,7 @@ import { palette, updatePreset } from "@primeuix/themes";
 import { Select } from "primevue";
 import { ref, watch } from "vue";
 
-const primaryColor = ref("amber");
+const primaryColor = ref("blue");
 
 watch(primaryColor, (newVal) => {
   updatePreset({

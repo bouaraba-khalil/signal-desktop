@@ -56,18 +56,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 <template>
   <div class="flex flex-col gap-4">
     <div class="mb-4 flex flex-col items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-20 text-primary">
-        <rect x="0" y="0" width="24" height="24" rx="8" fill="currentColor" />
-        <path
-          d="M8.25 9l3 3-3 3M12.75 15h4"
-          fill="none"
-          stroke="white"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-        />
-      </svg>
-
+      <img src="@/assets/images/icon.png" alt="Signal" class="size-20 rounded-xl" />
       <h1 class="text-2xl font-bold">{{ t("title") }}</h1>
     </div>
 
