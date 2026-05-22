@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "tailwindcss-primeui";
+@import "./font.css";
+@import "./theme.css";
+@import "./editor.css";
+@import "primeicons/primeicons.css";
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+@theme {
+  --color-dark: #222831;
+  --color-light-dark: #393e46;
+  --color-white: #eeeeee;
+  --color-yellow: #ffd369;
+  --color-blue: #00adb5;
+  --color-orange: #f07b3f;
+  --color-red: #ea5455;
+}
