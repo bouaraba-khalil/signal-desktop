@@ -6,6 +6,7 @@ export const messages = {
       description:
         "Select the path that aligns with your goals. Each journey is designed to transform you from beginner to job-ready developer.",
     },
+    start: "Start",
   },
   fr: {
     title: {
@@ -14,6 +15,7 @@ export const messages = {
       description:
         "Choisissez le chemin qui correspond à vos objectifs. Chaque parcours est conçu pour vous transformer de novice à développeur qualifié pour un emploi.",
     },
+    start: "Commencer",
   },
   ar: {
     title: {
@@ -22,5 +24,6 @@ export const messages = {
       description:
         "اختر المسار الذي يتوافق مع أهدافك. يتم تصميم كل رحلة لتحويلك من مبتدئ إلى مطور مؤهل للعمل.",
     },
+    start: "ابدأ",
   },
 };

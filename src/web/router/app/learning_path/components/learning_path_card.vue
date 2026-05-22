@@ -5,9 +5,11 @@ import * as vue from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterLink } from "vue-router";
 
+import { messages } from "../message";
+
 import type { LearningPaths } from "@/types/core";
 
-const { locale } = useI18n();
+const { locale, t } = useI18n({ messages });
 
 const props = defineProps<{
   learningPath: LearningPaths;
@@ -45,7 +47,7 @@ const title = vue.computed(() => {
     <RouterLink :to="`/app/learning-path/${props.learningPath._id}`" class="w-full">
       <Button
         class="flex-end mt-4 w-full"
-        label="Start"
+        :label="t('start')"
         icon="pi pi-chevron-right"
         iconPos="right"
         icon-class="text-xs!"

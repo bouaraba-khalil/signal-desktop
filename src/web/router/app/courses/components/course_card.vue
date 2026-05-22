@@ -4,9 +4,11 @@ import { Button } from "primevue";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 
+import { messages } from "../../learning_path/message";
+
 import type { Courses } from "@/types/core";
 
-const { locale } = useI18n();
+const { locale, t } = useI18n({ messages });
 
 const props = defineProps<{
   course: Courses & { order: number };
@@ -40,7 +42,7 @@ const title = computed(() => {
     </div>
     <RouterLink :to="`/app/courses/${props.course._id}`">
       <Button
-        label="Start"
+        :label="t('start')"
         icon="pi pi-chevron-right"
         iconPos="right"
         class="mt-8 w-full"
