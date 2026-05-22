@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 
-import LearningPathCard from "./learning_path_card.vue";
 import Loader from "@/components/loader/loader.vue";
 import { useGet } from "@/composables/useGet";
+
+import LearningPathCard from "./learning_path_card.vue";
 
 import type { LearningPath } from "@/types/core";
 

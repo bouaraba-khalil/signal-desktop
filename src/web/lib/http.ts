@@ -1,4 +1,5 @@
 import ky from "ky";
+
 import { authClient } from "./better-auth";
 
 const apiClient = ky.create({

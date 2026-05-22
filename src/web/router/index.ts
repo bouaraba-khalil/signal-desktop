@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
+import Course from "./app/courses/[id]/index.vue";
+import Courses from "./app/courses/index.vue";
 import App from "./app/index.vue";
 import LearningPath from "./app/learning_path/index.vue";
 import Login from "./login/index.vue";
-import Courses from "./app/courses/index.vue";
-import Course from "./app/courses/[id]/index.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),

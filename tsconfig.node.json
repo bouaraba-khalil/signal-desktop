@@ -2,13 +2,9 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2023",
-    "lib": [
-      "ES2023"
-    ],
+    "lib": ["ES2023"],
     "module": "ESNext",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -24,15 +20,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
-      "@lydell/node-pty": [
-        "./node_modules/@lydell/node-pty/node-pty.d.ts"
-      ],
-      "@/*": [
-        "./src/electron/*"
-      ],
-      "@shared/*": [
-        "./src/shared/*"
-      ]
+      "@lydell/node-pty": ["./node_modules/@lydell/node-pty/node-pty.d.ts"],
+      "@/*": ["./src/electron/*"],
+      "@shared/*": ["./src/shared/*"]
     }
   },
   "include": [

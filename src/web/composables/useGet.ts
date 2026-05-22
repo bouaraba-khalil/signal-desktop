@@ -1,7 +1,7 @@
 import { useQuery, type UseQueryOptions } from "@tanstack/vue-query";
+import * as vue from "vue";
 
 import { apiClient } from "@/lib/http";
-import * as vue from "vue";
 
 export interface UseGetProps {
   path: string;

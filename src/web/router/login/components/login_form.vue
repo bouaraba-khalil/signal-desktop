@@ -7,8 +7,9 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { z } from "zod";
 
-import { messages } from "./messages";
 import { authClient } from "@/lib/better-auth";
+
+import { messages } from "./messages";
 
 const { t } = useI18n({ messages });
 

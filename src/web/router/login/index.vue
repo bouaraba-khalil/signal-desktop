@@ -2,10 +2,11 @@
 import * as vue from "vue";
 import { useRouter } from "vue-router";
 
-import LoginBackground from "./components/login_background.vue";
-import LoginForm from "./components/login_form.vue";
 import Loader from "@/components/loader/loader.vue";
 import { authClient } from "@/lib/better-auth";
+
+import LoginBackground from "./components/login_background.vue";
+import LoginForm from "./components/login_form.vue";
 
 const router = useRouter();
 const session = authClient.useSession();

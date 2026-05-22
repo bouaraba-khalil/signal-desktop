@@ -1,10 +1,15 @@
 {
   "name": "desktop",
-  "productName": "desktop",
   "version": "1.0.0",
-  "description": "My Electron application description",
-  "main": ".vite/build/main.js",
   "private": true,
+  "description": "My Electron application description",
+  "keywords": [],
+  "license": "MIT",
+  "author": {
+    "name": "Khalil Bouaraba",
+    "email": "bouaraba.khalil@gmail.com"
+  },
+  "main": ".vite/build/main.js",
   "scripts": {
     "dev": "ELECTRON_OVERRIDE_DIST_PATH=/usr/lib/electron  npm run start",
     "start": "electron-forge start",
@@ -16,12 +21,9 @@
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check"
   },
-  "keywords": [],
-  "author": {
-    "name": "Khalil Bouaraba",
-    "email": "bouaraba.khalil@gmail.com"
+  "dependencies": {
+    "vue-tsc": "^3.3.1"
   },
-  "license": "MIT",
   "devDependencies": {
     "@electron-forge/cli": "^7.11.2",
     "@electron-forge/maker-deb": "^7.11.2",
@@ -64,7 +66,5 @@
     "vue-i18n": "^11.4.4",
     "vue-router": "^5.0.7"
   },
-  "dependencies": {
-    "vue-tsc": "^3.3.1"
-  }
+  "productName": "desktop"
 }

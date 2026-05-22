@@ -4,10 +4,11 @@ import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 
-import CourseCard from "./components/course_card.vue";
 import Loader from "@/components/loader/loader.vue";
 import { useGet } from "@/composables/useGet";
 import { localMapper } from "@/lib/utils";
+
+import CourseCard from "./components/course_card.vue";
 
 import type { Course, LearningPath } from "@/types/core";
 
