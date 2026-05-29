@@ -2,6 +2,9 @@
 import Splitter from "primevue/splitter";
 import SplitterPanel from "primevue/splitterpanel";
 
+import Description from "./description.vue";
+import Quiz from "./quiz.vue";
+
 import type { Lesson } from "@/types/core";
 
 const props = defineProps<{
@@ -11,7 +14,11 @@ const props = defineProps<{
 
 <template>
   <Splitter class="flex-1" state-storage="local" state-key="lessonSize">
-    <SplitterPanel class="flex items-center justify-center" :min-size="20"> Panel 1 </SplitterPanel>
-    <SplitterPanel class="flex items-center justify-center" :min-size="20"> Panel 2 </SplitterPanel>
+    <SplitterPanel :min-size="20">
+      <Description :lesson="props.lessons" />
+    </SplitterPanel>
+    <SplitterPanel :min-size="20">
+      <Quiz v-if="props.lessons.type === 'quiz'" :lesson="props.lessons" />
+    </SplitterPanel>
   </Splitter>
 </template>

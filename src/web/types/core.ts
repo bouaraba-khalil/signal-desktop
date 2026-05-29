@@ -6,7 +6,17 @@ export type I18nText = {
 
 export type Level = "beginner" | "intermediate" | "advanced" | "professional";
 
-export type LESSON_TYPE = "quiz" | "one_file_code" | "multi_file_code" | "one_file_algo_code";
+export enum LESSON_TYPE_ENUM {
+  QUIZ = "quiz",
+  // for learning programming languages
+  ONE_FILE_CODE = "one_file_code",
+  MULTI_FILE_CODE = "multi_file_code",
+
+  // for algo exercises
+  ONE_FILE_ALGO_CODE = "one_file_algo_code",
+}
+
+export type LESSON_TYPE = (typeof LESSON_TYPE_ENUM)[keyof typeof LESSON_TYPE_ENUM];
 
 export type Language = "python" | "javascript" | "typescript";
 
