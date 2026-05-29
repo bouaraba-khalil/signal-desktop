@@ -1,10 +1,10 @@
 /// <reference types="vite/client" />
 
-import type { electronAPI, electronEvents } from "../preload";
+import type { listeners, emitters } from "../preload";
 
 declare global {
   interface Window {
-    electronAPI: typeof electronAPI;
-    electronEvents: typeof electronEvents;
+    electronListeners: typeof listeners;
+    electronEmitters: typeof emitters;
   }
 }

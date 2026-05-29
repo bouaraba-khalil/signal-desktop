@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 
-export const electronAPI = {
+export const listeners = {
   onTest: (callback: (value: number) => void) => {
     const listener = (_: unknown, value: number) => callback(value);
     ipcRenderer.on("test", listener);
@@ -9,7 +9,7 @@ export const electronAPI = {
     };
   },
 };
-export const electronEvents = {};
+export const emitters = {};
 
-contextBridge.exposeInMainWorld("electronAPI", electronAPI);
-contextBridge.exposeInMainWorld("electronEvents", electronEvents);
+contextBridge.exposeInMainWorld("electronListeners", listeners);
+contextBridge.exposeInMainWorld("electronEmitters", emitters);

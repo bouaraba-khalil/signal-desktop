@@ -26,7 +26,7 @@ watch(locale, (newVal) => {
 });
 
 onMounted(() => {
-  window.electronAPI.onTest((value) => {
+  window.electronListeners["onTest"]((value: number) => {
     count.value = value;
   });
 });
