@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Button } from "primevue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 
@@ -11,6 +13,7 @@ import type { Course, Lesson, Chapter } from "@/types/core";
 const route = useRoute();
 const { locale } = useI18n();
 const courseId = route.params.courseId;
+const lessonsId = ref("6a194bcc0c85749bbf71597f");
 
 const getCourse = useGet<Course & { chapters: (Chapter & { lessons: Lesson[] })[] }>({
   path: `/core/course/${courseId}`,
@@ -20,8 +23,17 @@ const getCourse = useGet<Course & { chapters: (Chapter & { lessons: Lesson[] })[
 });
 
 const getLessons = useGet<Lesson>({
-  path: `/core/lesson/6a194bcc0c85749bbf71597f`,
+  path: computed(() => `/core/lesson/${lessonsId.value}`),
+  options: computed(() => ({
+    enabled: !!lessonsId.value,
+  })),
 });
+
+const lessons = [
+  { name: "quiz", id: "6a194bcc0c85749bbf71597f" },
+  { name: "one_file_code", id: "6a194bcc0c85749bbf71598f" },
+  { name: "one_file_algo_code", id: "6a194bcc0c85749bbf71599f" },
+];
 </script>
 
 <template>
@@ -42,10 +54,20 @@ const getLessons = useGet<Lesson>({
           </p>
         </div>
       </div>
+      <div class="flex gap-2 px-2">
+        <Button
+          v-for="lesson in lessons"
+          :key="lesson.id"
+          :label="lesson.name"
+          @click="lessonsId = lesson.id"
+          :variant="lessonsId === lesson.id ? 'filled' : 'outlined'"
+          :disabled="getLessons.isLoading.value"
+        />
+      </div>
       <div v-if="getLessons.isLoading.value" class="flex items-center justify-center">
         <Loader />
       </div>
-      <div v-else class="flex flex-1 p-4">
+      <div v-else-if="getLessons.data.value" class="flex flex-1 p-4">
         <LessonsLayout :lessons="getLessons.data.value" />
       </div>
     </div>

@@ -3,12 +3,12 @@ import { Button } from "primevue";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-import type { Lesson, Quizz } from "@/types/core";
+import type { Quizz } from "@/types/core";
 
 const { locale } = useI18n();
 
 const props = defineProps<{
-  lesson: Lesson;
+  quiz: Quizz;
 }>();
 
 const selectedOption = ref<{ label: string; isCorrect: boolean } | null>(null);
@@ -28,11 +28,11 @@ function reset() {
 }
 
 const question = computed(() => {
-  return props.lesson.quiz?.question[locale.value as keyof typeof props.lesson.quiz.question] ?? "";
+  return props.quiz?.question[locale.value as keyof typeof props.quiz.question] ?? "";
 });
 
 const options = computed(() => {
-  return props.lesson.quiz?.options.map((option) => {
+  return props.quiz?.options.map((option) => {
     return {
       label: option.option[locale.value as keyof typeof option.option],
       isCorrect: option.isCorrect,
