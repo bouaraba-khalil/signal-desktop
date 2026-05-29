@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import MarkdownIt from "markdown-it";
-import { Select } from "primevue";
-import Splitter from "primevue/splitter";
-import SplitterPanel from "primevue/splitterpanel";
-import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 
+import LessonsLayout from "@/components/lessons/layout.vue";
 import Loader from "@/components/loader/loader.vue";
 import { useGet } from "@/composables/useGet";
-import { localMapper } from "@/lib/utils";
 
 import type { Course, Lesson, Chapter } from "@/types/core";
 
@@ -23,51 +18,35 @@ const getCourse = useGet<Course & { chapters: (Chapter & { lessons: Lesson[] })[
     enabled: !!courseId,
   },
 });
-const chapter = ref<(Chapter & { lessons: Lesson[] }) | null>(null);
-const lesson = ref<Lesson | null>(null);
 
-watch(getCourse.data, (newVal) => {
-  if (!!newVal && !chapter.value && !lesson.value) {
-    chapter.value = newVal?.chapters?.[0] ?? null;
-    lesson.value = newVal?.chapters?.[0]?.lessons?.[0] ?? null;
-  }
-});
-
-const lessonContent = computed(() => {
-  if (!lesson.value) return "";
-  const md = new MarkdownIt();
-  const result = md.render(localMapper(locale.value, lesson.value, "content") ?? "");
-  return result;
-});
-
-const lessonTitle = computed(() => {
-  if (!lesson.value) return "";
-  return localMapper(locale.value, lesson.value, "title");
+const getLessons = useGet<Lesson>({
+  path: `/core/lesson/6a194bcc0c85749bbf71597f`,
 });
 </script>
 
 <template>
-  <div class="flex flex-1 flex-col">
+  <div class="mt-5 flex flex-1 flex-col">
     <div v-if="getCourse.isLoading.value" class="flex items-center justify-center"><Loader /></div>
     <div v-else class="flex flex-1 flex-col">
       <div>
-        <Select
-          v-model="chapter"
-          :options="getCourse.data.value?.chapters ?? []"
-          optionLabel="title_fr"
-        />
-        <Select v-model="lesson" :options="chapter?.lessons ?? []" optionLabel="title_fr" />
+        <div>
+          <h1 class="text-center text-4xl font-bold text-primary">
+            {{ getCourse.data.value?.name[locale as keyof typeof getCourse.data.value.name] }}
+          </h1>
+          <p class="text-center text-color-emphasis">
+            {{
+              getCourse.data.value?.description[
+                locale as keyof typeof getCourse.data.value.description
+              ]
+            }}
+          </p>
+        </div>
       </div>
-      <div class="flex flex-1 p-4">
-        <Splitter class="flex-1">
-          <SplitterPanel class="p-4" :min-size="30">
-            <div>
-              <h1 class="text-2xl font-bold">{{ lessonTitle }}</h1>
-              <div v-html="lessonContent" />
-            </div>
-          </SplitterPanel>
-          <SplitterPanel class="p-4" :min-size="30"> Panel 2 </SplitterPanel>
-        </Splitter>
+      <div v-if="getLessons.isLoading.value" class="flex items-center justify-center">
+        <Loader />
+      </div>
+      <div v-else class="flex flex-1 p-4">
+        <LessonsLayout :lessons="getLessons.data.value" />
       </div>
     </div>
   </div>

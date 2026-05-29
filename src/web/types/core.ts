@@ -1,93 +1,3 @@
-export interface LearningPath {
-  id: string;
-  level: string;
-  color: string;
-  image?: string;
-  title_fr: string;
-  title_en: string;
-  title_ar: string;
-  description_fr: string;
-  description_en: string;
-  description_ar: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Course {
-  id: string;
-  learning_path_id: string;
-  order: number;
-  level: string;
-  color: string;
-  image: string | null;
-
-  title_fr: string | null;
-  title_en: string | null;
-  title_ar: string | null;
-
-  description_fr: string | null;
-  description_en: string | null;
-  description_ar: string | null;
-
-  status: string;
-
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface Chapter {
-  id: string;
-  course_id: string;
-  order: number;
-
-  title_fr: string;
-  title_en: string;
-  title_ar: string;
-
-  status: string;
-
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface Lesson {
-  id: string;
-  chapter_id: string;
-  order: number;
-
-  title_fr: string;
-  title_en: string;
-  title_ar: string;
-
-  content_fr: string;
-  content_en: string;
-  content_ar: string;
-
-  type: string;
-
-  multiple_choice_options: any;
-  multiple_choice_correct_options: any;
-
-  code_languages: any;
-  code_languages_templates: any;
-  code_languages_solutions: any;
-  code_languages_tests: any;
-
-  code_language: string | null;
-  code_template: any;
-  code_solution: any;
-  code_test: any;
-
-  quizz_questions: any;
-  quizz_correct_answers: any;
-
-  status: string;
-
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 export type I18nText = {
   ar?: string;
   fr: string;
@@ -96,7 +6,11 @@ export type I18nText = {
 
 export type Level = "beginner" | "intermediate" | "advanced" | "professional";
 
-export type LearningPaths = {
+export type LESSON_TYPE = "quiz" | "one_file_code" | "multi_file_code" | "one_file_algo_code";
+
+export type Language = "python" | "javascript" | "typescript";
+
+export type LearningPath = {
   _id: string;
   name: I18nText;
   description: I18nText;
@@ -105,11 +19,81 @@ export type LearningPaths = {
   updatedAt: string;
 };
 
-export type Courses = {
+export type Course = {
   _id: string;
   name: I18nText;
   description: I18nText;
   level: Level;
   createdAt: string;
   updatedAt: string;
+};
+
+export type Chapter = {
+  _id: string;
+  name: I18nText;
+  status: I18nText;
+
+  order: number;
+  courseId: string;
+
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Quizz = {
+  question: I18nText;
+
+  options: {
+    option: I18nText;
+    isCorrect: boolean;
+  }[];
+};
+
+export type OneFileCode = {
+  fileContent: string;
+  testFile: string;
+  solutionFile: string;
+  language: Language;
+};
+
+export type OneFileAlgoCode = {
+  python: OneFileCode | null;
+  javascript: OneFileCode | null;
+  typescript: OneFileCode | null;
+};
+
+export type MultiFileCode = {
+  files: {
+    fileName: string;
+    fileContent: string;
+  }[];
+
+  testFile: string;
+  solutionFile: string;
+
+  language: Language;
+};
+
+export type Lesson = {
+  chapterId: string;
+
+  order: number;
+
+  name: I18nText;
+  content: I18nText;
+
+  status: string;
+
+  type: LESSON_TYPE;
+
+  quiz: Quizz | null;
+
+  oneFileCode: OneFileCode | null;
+
+  multiFileCode: MultiFileCode | null;
+
+  oneFileAlgoCode: OneFileAlgoCode | null;
+
+  createdAt: Date;
+  updatedAt: Date;
 };

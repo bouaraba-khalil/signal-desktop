@@ -7,12 +7,12 @@ import { RouterLink } from "vue-router";
 
 import { messages } from "../message";
 
-import type { LearningPaths } from "@/types/core";
+import type { LearningPath } from "@/types/core";
 
 const { locale, t } = useI18n({ messages });
 
 const props = defineProps<{
-  learningPath: LearningPaths;
+  learningPath: LearningPath;
 }>();
 
 const description = vue.computed(() => {

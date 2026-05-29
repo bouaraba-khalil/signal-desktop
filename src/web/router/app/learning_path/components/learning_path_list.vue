@@ -6,11 +6,11 @@ import { useGet } from "@/composables/useGet";
 
 import LearningPathCard from "./learning_path_card.vue";
 
-import type { LearningPaths } from "@/types/core";
+import type { LearningPath } from "@/types/core";
 
 const { locale } = useI18n();
 
-const getLearningPaths = useGet<LearningPaths[]>({
+const getLearningPaths = useGet<LearningPath[]>({
   path: "/core/learning-paths",
 });
 </script>

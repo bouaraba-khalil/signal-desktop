@@ -6,12 +6,12 @@ import { useI18n } from "vue-i18n";
 
 import { messages } from "../../learning_path/message";
 
-import type { Courses } from "@/types/core";
+import type { Course } from "@/types/core";
 
 const { locale, t } = useI18n({ messages });
 
 const props = defineProps<{
-  course: Courses & { order: number };
+  course: Course & { order: number };
 }>();
 
 const description = computed(() => {

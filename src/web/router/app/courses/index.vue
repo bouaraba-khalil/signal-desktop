@@ -9,14 +9,14 @@ import { useGet } from "@/composables/useGet";
 
 import CourseCard from "./components/course_card.vue";
 
-import type { Courses, LearningPaths } from "@/types/core";
+import type { Course, LearningPath } from "@/types/core";
 
 const { locale } = useI18n();
 
 const route = useRoute();
 const learningPathId = route.params.learningPathId;
 
-const getCourseList = useGet<LearningPaths & { courses: (Courses & { order: number })[] }>({
+const getCourseList = useGet<LearningPath & { courses: (Course & { order: number })[] }>({
   path: `/core/learning-paths/${learningPathId}`,
   options: {
     enabled: !!learningPathId,
