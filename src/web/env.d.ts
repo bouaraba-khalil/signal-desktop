@@ -4,7 +4,7 @@ import type { listeners, emitters } from "../preload";
 
 declare global {
   interface Window {
-    electronListeners: typeof listeners;
-    electronEmitters: typeof emitters;
+    listeners: typeof listeners;
+    emitters: typeof emitters;
   }
 }

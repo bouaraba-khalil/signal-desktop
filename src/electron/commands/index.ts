@@ -1,9 +1,18 @@
-import type { BrowserWindow } from "electron";
+import { ipcMain, type BrowserWindow } from "electron";
 
-export function startCommand(mainWindow: BrowserWindow) {
-  let count = 0;
-  setInterval(() => {
-    mainWindow.webContents.send("test", count);
-    count++;
-  }, 1000);
+import { counterCommand } from "./counter";
+import { submitCommand } from "./submit";
+
+export function listenerFactory() {
+  return (channel: string, listener: (event: Electron.IpcMainInvokeEvent, ...args: any[]) => any) =>
+    ipcMain.handle(channel, listener);
+}
+
+export function emitterFactory(bw: BrowserWindow) {
+  return (event: string, ...args: any[]) => bw.webContents.send(event, ...args);
+}
+
+export function startCommand(bw: BrowserWindow) {
+  counterCommand(bw);
+  submitCommand(bw);
 }

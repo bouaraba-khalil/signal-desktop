@@ -5,6 +5,7 @@ import Courses from "./app/courses/index.vue";
 import App from "./app/index.vue";
 import LearningPath from "./app/learning_path/index.vue";
 import Login from "./login/index.vue";
+import Test from "./test.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -33,6 +34,11 @@ const router = createRouter({
           path: "courses/:courseId",
           name: "course-detail",
           component: Course,
+        },
+        {
+          path: "test",
+          name: "test-detail",
+          component: Test,
         },
       ],
     },

@@ -26,7 +26,7 @@ watch(locale, (newVal) => {
 });
 
 onMounted(() => {
-  window.electronListeners["onTest"]((value: number) => {
+  window.listeners["test"]((value: number) => {
     count.value = value;
   });
 });
@@ -34,9 +34,12 @@ onMounted(() => {
 
 <template>
   <div class="flex min-h-screen flex-col pt-[30px]">
-    <RouterLink to="/app/learning-path" class="absolute top-2 left-2 text-primary"
-      ><i class="pi pi-home"
-    /></RouterLink>
+    <RouterLink to="/app/learning-path" class="absolute top-2 left-2 text-primary">
+      <i class="pi pi-home" />
+    </RouterLink>
+    <RouterLink to="/app/test" class="absolute top-2 left-20 text-2xl font-bold text-primary">
+      test
+    </RouterLink>
     <p class="absolute top-0 left-10 text-2xl font-bold text-primary">{{ count }}</p>
     <div class="sticky top-10 z-10 flex items-center justify-end gap-2">
       <Logout />
