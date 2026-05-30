@@ -10,7 +10,10 @@ onMounted(() => {
 });
 
 function submit() {
-  window.emitters[ELECTRON_LISTENERS.SUBMIT]({ file: "test.py", test: "test" }).then((result) => {
+  window.emitters[ELECTRON_LISTENERS.SUBMIT]({
+    content: "function add(a,b){return a+b;};",
+    test: "import test from 'node:test';import assert from 'node:assert'; test('add', () => { assert.equal(add(1, 2), 3); });test('add2', () => { assert.equal(add(2, 3), 5); });",
+  }).then((result) => {
     console.log("emitter result", result);
   });
 }

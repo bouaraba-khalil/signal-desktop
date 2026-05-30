@@ -8,9 +8,9 @@ export function submitCommand(bw: BrowserWindow) {
   const listen = listenerFactory();
   const emit = emitterFactory(bw);
 
-  listen(ELECTRON_LISTENERS.SUBMIT, async (_event, { file, test }) => {
-    console.log(file, test);
-    emit(ELECTRON_EMITTERS.SUBMIT_STATUS, { file, test });
+  listen(ELECTRON_LISTENERS.SUBMIT, async (_event, { content, test }) => {
+    emit(ELECTRON_EMITTERS.SUBMIT_STATUS, { type: "status", message: "running" });
+    emit(ELECTRON_EMITTERS.SUBMIT_STATUS, { type: "output", message: { content, test } });
     return { success: true };
   });
 }

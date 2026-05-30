@@ -21,8 +21,8 @@ export const listeners = {
   },
 };
 export const emitters = {
-  [ELECTRON_LISTENERS.SUBMIT]: async ({ file, test }: { file: string; test: string }) =>
-    await ipcRenderer.invoke(ELECTRON_LISTENERS.SUBMIT, { file, test }),
+  [ELECTRON_LISTENERS.SUBMIT]: async ({ content, test }: { content: string; test: string }) =>
+    await ipcRenderer.invoke(ELECTRON_LISTENERS.SUBMIT, { content, test }),
 };
 
 contextBridge.exposeInMainWorld("listeners", listeners);
